@@ -200,9 +200,10 @@
         <!-- How to Use Section -->
         <div class="how-to-use" id="howToUseSection">
             <span class="close-btn" onclick="closeHowToUse()">X</span>
-            <h2>How to Use AZOTA BYPASS v1.1.0 (Nguyen Huynh Dang Nhut)</h2>
+            <h2>How to Use AZOTA BYPASS</h2>
             <p>Follow these steps to use AZOTA BYPASS effectively:</p>
             <ol>
+                <li>The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you</li>
                 <li>Enter the URL of the website you want to bypass in the "Enter The AZOTA EXAM URL" field.</li>
                 <li>Enter the password to gain access to the site.</li>
                 <li>Optionally, enter your email for further communication or notifications.</li>
@@ -226,8 +227,8 @@
 
     <script>
         alert('This is the AZOTA BYPASS (Link) - Version 1.1.0 (Made by Nguyen Huynh Dang Nhut - https://github.com/DangNhutNguyen)');
-        alert('Use: Enter the EXAM URL then Enter Password and Load the website, then use the Bypass and Enjoy');
-
+        alert('The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you');
+        alert('Ứng dụng không được sử dụng trong các mục đích xấu, gây ảnh hưởng đến các quyền lợi khi học và đây là ứng dụng dùng cho việc ứng dụng HTML, mọi hành vi gây ảnh hưởng như: Sử dụng ứng dụng trong thời gian thi, gây ảnh hưởng và gây hậu quả có thể bị truy tố trách nhiệm. Xin cảm ơn');
         document.getElementById('loadButton').addEventListener('click', function() {
             const password = document.getElementById('passwordInput').value;
             if (password === '09102008') { // Example password
@@ -242,10 +243,6 @@
                 alert('Incorrect password.');
             }
         });
-    <div id="warningMessage" class="warning-message">
-        <p id="warningText" class="warning-text">Ứng dụng không được sử dụng trong các mục đích xấu, gây ảnh hưởng đến các quyền lợi khi học và đây là ứng dụng dùng cho việc ứng dụng HTML, mọi hành vi gây ảnh hưởng như: Sử dụng ứng dụng trong thời gian thi, gây ảnh hưởng và gây hậu quả có thể bị truy tố trách nhiệm. Xin cảm ơn</p>
-        <p id="warningTextEn" class="warning-text" style="display: none;">The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you</p>
-    </div>
 
         document.getElementById('injectButton').addEventListener('click', function() {
             const password = document.getElementById('passwordInput').value;
