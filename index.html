@@ -243,7 +243,6 @@
                 alert('Incorrect password.');
             }
         });
-
         document.getElementById('injectButton').addEventListener('click', function() {
             const password = document.getElementById('passwordInput').value;
             if (password === '09102008') { // Example password
@@ -260,7 +259,6 @@
                         });
                     }
                     
-                    
                     const eventTypes = [
                         'beforeunload', 'blur', 'click', 'DOMContentLoaded', 'hashchange',
                         'keydown', 'load', 'locationchange', 'message', 'mousedown',
@@ -273,12 +271,16 @@
                     removeAllEventListeners(document, eventTypes);
                     
                     console.log("Removed all");
-
+        
                 `);
+        
+                // Show notification
+                showNotification('Event listeners bypassed successfully.');
             } else {
                 alert('Incorrect password - Contact: penciltalk0910@gmail.com');
             }
         });
+
 
         document.getElementById('toggleModeButton').addEventListener('click', function() {
             document.body.classList.toggle('dark-mode');
