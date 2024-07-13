@@ -236,6 +236,7 @@
                 if (url) {
                     document.getElementById('targetIframe').src = url;
                     showNotification('Website loaded successfully.');
+                    alert('Website loaded successfully.')
                 } else {
                     alert('Please enter a valid URL.');
                 }
@@ -276,7 +277,7 @@
                     console.log("Removed all event listeners inside iframe");
         
                 `);
-        
+                alert('Event listeners inside the iframe bypassed successfully.')
                 // Show notification outside the iframe
                 showNotification('Event listeners inside the iframe bypassed successfully.');
             } else {
