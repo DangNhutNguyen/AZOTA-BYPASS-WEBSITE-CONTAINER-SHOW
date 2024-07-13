@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZOTA BYPASS (LINK) V1.1</title>
+    <link rel="icon" href="C:\Users\HP\Desktop\cod2\logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%; /* Full width of the viewport */
+            height: 120%; /* Full height of the viewport */
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease; /* Smooth transition for zoom effect */
+            position: relative; /* Required for absolute positioning inside */
+        }
+        h1 {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin-top: 15px ;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .description {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        input[type="password"], input[type="text"], input[type="email"] {
+            width: calc(100% - 90px);
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #iframeContainer {
+            width: 80%;
+            flex: 2; /* Take up remaining space */
+            border: 2px solid #ccc;
+            margin-top: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative; /* Required for absolute positioning inside */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: all 0.3s ease; /* Smooth transition for zoom effect */
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            z-index: 999;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+        .container.dark-mode {
+            background-color: #333;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Logo styles */
+        .logo {
+            width: 100px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px;
+        }
+
+        /* Language switch button styles */
+        #languageSwitch {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            background-color: #ccc;
+            color: #333;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Full screen toggle button styles */
+        #fullScreenToggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            background-color: #ccc;
+            color: #333;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* How to Use Section */
+        .how-to-use {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: left;
+            position: relative;
+        }
+        .how-to-use h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .how-to-use p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .how-to-use ol {
+            margin-bottom: 10px;
+        }
+        .how-to-use ol li {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #666;
+        }
+        .close-btn:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="C:\Users\HP\Desktop\cod2\logo.png" alt="Logo" class="logo">
+        <h1>AZOTA BYPASS (LINK) Version 1.1.0 - NGUYEN HUYNH DANG NHUT</h1>
+        <label for="urlInput">Enter The AZOTA EXAM URL</label>
+        <input type="text" id="urlInput" placeholder="https://azota.vn/example">
+        <div class="description">Enter Password or Contact to admin to accepted you use this site</div>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <label for="emailInput">Enter your email</label>
+        <input type="email" id="emailInput" placeholder="example@example.com">
+        <button id="loadButton">Load Website</button>
+        <button id="injectButton">BYPASS</button>
+        <button id="toggleModeButton">Toggle Dark Mode</button>
+        
+        <div id="iframeContainer">
+            <iframe id="targetIframe" src=""></iframe>
+        </div>
+
+        <!-- How to Use Section -->
+        <div class="how-to-use" id="howToUseSection">
+            <span class="close-btn" onclick="closeHowToUse()">X</span>
+            <h2>How to Use AZOTA BYPASS</h2>
+            <p>Follow these steps to use AZOTA BYPASS effectively:</p>
+            <ol>
+                <li>Enter the URL of the website you want to bypass in the "Enter The AZOTA EXAM URL" field.</li>
+                <li>Enter the password to gain access to the site.</li>
+                <li>Optionally, enter your email for further communication or notifications.</li>
+                <li>Click on the "Load Website" button to load the specified website in the iframe.</li>
+                <li>Use the "BYPASS" button to bypass event listeners on the loaded website.</li>
+                <li>Toggle dark mode by clicking on the "Toggle Dark Mode" button.</li>
+                <li>Enjoy using the AZOTA BYPASS features!</li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <!-- Language switch button -->
+    <button id="languageSwitch" onclick="toggleLanguage()">English</button>
+
+    <!-- Full screen toggle button -->
+    <button id="fullScreenToggle" onclick="toggleFullScreen()">Full Screen</button>
+
+    <script>
+        alert('This is the AZOTA BYPASS (Link) - Version 1.1.0 (Made by Nguyen Huynh Dang Nhut - https://github.com/DangNhutNguyen)');
+        alert('Use: Enter the EXAM URL then Enter Password and Load the website, then use the Bypass and Enjoy');
+
+        document.getElementById('loadButton').addEventListener('click', function() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === '09102008') { // Example password
+                const url = document.getElementById('urlInput').value;
+                if (url) {
+                    document.getElementById('targetIframe').src = url;
+                    showNotification('Website loaded successfully.');
+                } else {
+                    alert('Please enter a valid URL.');
+                }
+            } else {
+                alert('Incorrect password.');
+            }
+        });
+
+        document.getElementById('injectButton').addEventListener('click', function() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === '09102008') { // Example password
+                const iframe = document.getElementById('targetIframe');
+                iframe.contentWindow.eval(`
+                    function removeAllEventListeners(target, eventType) {
+                        const listeners = getEventListeners(target)[eventType];
+                        if (listeners) {
+                            listeners.forEach(listener => {
+                                target.removeEventListener(eventType, listener.listener);
+                            });
+                        }
+                    }
+                    const windowEventTypes = [
+                        'beforeunload',
+                        'blur',
+                        'click',
+                        'DOMContentLoaded',
+                        'hashchange',
+                        'keydown',
+                        'load',
+                        'locationchange',
+                        'message',
+                        'mousedown',
+                        'orientationchange',
+                        'popstate',
+                        'resize',
+                        'scroll',
+                        'touchstart'
+                    ];
+
+                    windowEventTypes.forEach(eventType => removeAllEventListeners(window, eventType));
+                    removeAllEventListeners(document, 'visibilitychange');
+
+                    console.log("Event listeners removed from window and document.");
+                    showNotification('Event listeners removed successfully.');
+                `);
+            } else {
+                alert('Incorrect password - Contact: penciltalk0910@gmail.com');
+            }
+        });
+
+        document.getElementById('toggleModeButton').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('.container').classList.toggle('dark-mode');
+        });
+
+        function showNotification(message) {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function(result) {
+                    if (result === 'granted') {
+                        new Notification('Azota Bypass', { body: message });
+                    }
+                });
+            } else {
+                console.log('This browser does not support desktop notification');
+            }
+        }
+
+        function toggleLanguage() {
+            const languageButton = document.getElementById('languageSwitch');
+            if (languageButton.textContent === 'English') {
+                // Switch to Vietnamese
+                languageButton.textContent = 'Tiếng Việt';
+                // Add code to switch interface to Vietnamese
+                document.getElementById('loadButton').textContent = 'Tải Trang Web';
+                document.getElementById('injectButton').textContent = 'Bỏ Qua';
+                document.getElementById('toggleModeButton').textContent = 'Chế Độ Tối';
+                document.querySelector('h1').textContent = 'AZOTA BYPASS (LINK) Phiên Bản 1.1.0 - NGUYEN HUYNH DANG NHUT';
+                document.querySelector('label[for="urlInput"]').textContent = 'Nhập Đường Link Cần Bỏ Qua';
+                document.querySelector('.description').textContent = 'Nhập Mật Khẩu hoặc Liên hệ quản trị viên để chấp nhận bạn sử dụng trang web này';
+                document.querySelector('label[for="passwordInput"]').textContent = 'Nhập mật khẩu';
+                document.querySelector('label[for="emailInput"]').textContent = 'Nhập email của bạn';
+                // Add additional translations as needed
+            } else {
+                // Switch to English
+                languageButton.textContent = 'English';
+                // Add code to switch interface to English
+                document.getElementById('loadButton').textContent = 'Load Website';
+                document.getElementById('injectButton').textContent = 'BYPASS';
+                document.getElementById('toggleModeButton').textContent = 'Toggle Dark Mode';
+                document.querySelector('h1').textContent = 'AZOTA BYPASS (LINK) Version 1.1.0 - NGUYEN HUYNH DANG NHUT';
+                document.querySelector('label[for="urlInput"]').textContent = 'Enter The AZOTA EXAM URL';
+                document.querySelector('.description').textContent = 'Enter Password or Contact to admin to accepted you use this site';
+                document.querySelector('label[for="passwordInput"]').textContent = 'Enter password';
+                document.querySelector('label[for="emailInput"]').textContent = 'Enter your email';
+                // Add additional translations as needed
+            }
+        }
+
+        function toggleZoom() {
+            const iframe = document.getElementById('targetIframe');
+            const currentZoom = parseFloat(iframe.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            const newZoom = currentZoom === 1 ? 1.5 : 1; // Toggle between 1x and 1.5x zoom
+            iframe.style.transform = `scale(${newZoom})`;
+        }
+
+        function toggleFullScreen() {
+            const iframeContainer = document.getElementById('iframeContainer');
+            const iframe = document.getElementById('targetIframe');
+            if (!document.fullscreenElement) {
+                iframeContainer.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Function to close the "How to Use" section
+        function closeHowToUse() {
+            const howToUseSection = document.getElementById('howToUseSection');
+            howToUseSection.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
