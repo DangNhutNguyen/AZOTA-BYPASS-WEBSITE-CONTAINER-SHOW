@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZOTA BYPASS (LINK) V1.1</title>
+    <title>AZOTA BYPASS (LINK) V2.0</title>
     <link rel="icon" href="logo.png" type="image/png">
     <style>
         body {
@@ -17,34 +17,56 @@
             height: 100vh;
         }
         .container {
-            width: 80%; /* Full width of the viewport */
-            height: 120%; /* Full height of the viewport */
-            padding: 30px;
+            width: 80%;
+            height: 180%;
+            padding: 40px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            transition: all 0.3s ease; /* Smooth transition for zoom effect */
-            position: relative; /* Required for absolute positioning inside */
+            transition: all 0.3s ease;
+            position: relative;
         }
         h1 {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            margin-top: 15px ;
-            font-size: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 24px;
+            margin-top: 15px;
             margin-bottom: 15px;
         }
-        .description {
-            text-align: left;
-            margin-bottom: 10px;
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .tab:hover {
+            background-color: #0056b3;
+        }
+        .tab.active {
+            background-color: #0056b3;
+        }
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+        .tab-content.active {
+            display: block;
         }
         label {
             display: block;
             margin-bottom: 10px;
             text-align: left;
+            font-weight: bold;
         }
         input[type="password"], input[type="text"], input[type="email"] {
             width: calc(100% - 90px);
@@ -63,298 +85,189 @@
             cursor: pointer;
             border-radius: 4px;
             margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
         #iframeContainer {
-            width: 80%;
-            flex: 2; /* Take up remaining space */
+            width: 100%;
+            flex: 1;
             border: 2px solid #ccc;
-            margin-top: 10px;
-            border-radius: 4px;
+            margin-top: 40px;
+            border-radius: 40px;
             overflow: hidden;
-            position: relative; /* Required for absolute positioning inside */
+            position: relative;
         }
         iframe {
             width: 100%;
-            height: 100%;
+            height: 800px;
             border: none;
-            transition: all 0.3s ease; /* Smooth transition for zoom effect */
+            transition: all 0.3s ease;
+        }
+        .console {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 20px;
+            padding: 10px;
+            font-family: monospace;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+        .console-input {
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        .console-button {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .console-button:hover {
+            background-color: #0056b3;
         }
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            z-index: 1000;
             display: none;
-            z-index: 999;
         }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #222;
+        .notification.success {
+            background-color: #28a745;
             color: #fff;
         }
-        .container.dark-mode {
-            background-color: #333;
+        .notification.error {
+            background-color: #dc3545;
             color: #fff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Logo styles */
-        .logo {
-            width: 100px; /* Adjust size as needed */
-            height: auto; /* Maintain aspect ratio */
-            margin-bottom: 20px;
-        }
-
-        /* Language switch button styles */
-        #languageSwitch {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 5px 10px;
-            font-size: 14px;
-            border: none;
-            background-color: #ccc;
-            color: #333;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        /* Full screen toggle button styles */
-        #fullScreenToggle {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 5px 10px;
-            font-size: 14px;
-            border: none;
-            background-color: #ccc;
-            color: #333;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        /* How to Use Section */
-        .how-to-use {
-            background-color: #f0f0f0;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            text-align: left;
-            position: relative;
-        }
-        .how-to-use h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .how-to-use p {
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-        .how-to-use ol {
-            margin-bottom: 10px;
-        }
-        .how-to-use ol li {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 14px;
-            cursor: pointer;
-            color: #666;
-        }
-        .close-btn:hover {
-            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="C:\Users\HP\Desktop\cod2\logo.png" alt="Logo" class="logo">
-        <h1>AZOTA BYPASS (LINK) Version 1.1.0 - NGUYEN HUYNH DANG NHUT</h1>
-        <label for="urlInput">Enter The AZOTA EXAM URL</label>
-        <input type="text" id="urlInput" placeholder="https://azota.vn/example">
-        <div class="description">Enter Password or Contact to admin to accepted you use this site</div>
-        <input type="password" id="passwordInput" placeholder="Enter password">
-        <label for="emailInput">Enter your email</label>
-        <input type="email" id="emailInput" placeholder="example@example.com">
-        <button id="loadButton">Load Website</button>
-        <button id="injectButton">BYPASS</button>
-        <button id="toggleModeButton">Toggle Dark Mode</button>
+        <h1>AZOTA BYPASS (LINK) Version 2.0.0</h1>
         
-        <div id="iframeContainer">
-            <iframe id="targetIframe" src=""></iframe>
+        <div class="tabs">
+            <div class="tab active" data-tab="tab1">AZOTA Website</div>
+            <div class="tab" data-tab="tab2">Google Search</div>
         </div>
 
-        <!-- How to Use Section -->
-        <div class="how-to-use" id="howToUseSection">
-            <span class="close-btn" onclick="closeHowToUse()">X</span>
-            <h2>How to Use AZOTA BYPASS</h2>
-            <p>Follow these steps to use AZOTA BYPASS effectively:</p>
-            <ol>
-                <li>The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you</li>
-                <li>Enter the URL of the website you want to bypass in the "Enter The AZOTA EXAM URL" field.</li>
-                <li>Enter the password to gain access to the site.</li>
-                <li>Optionally, enter your email for further communication or notifications.</li>
-                <li>Click on the "Load Website" button to load the specified website in the iframe.</li>
-                <li>Use the "BYPASS" button to bypass event listeners on the loaded website.</li>
-                <li>Toggle dark mode by clicking on the "Toggle Dark Mode" button.</li>
-                <li>Enjoy using the AZOTA BYPASS features!</li>
-                <li>Adminators: Nguyễn Huỳnh Đăng Nhựt</li>
-                <li>Contact: penciltalk0910@gmail.com</li>
-            </ol>
+        <div id="tab1" class="tab-content active">
+            <label for="urlInput">Enter AZOTA Exam URL</label>
+            <input type="text" id="urlInput" placeholder="https://azota.vn/example">
+            <label for="passwordInput">Password</label>
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <label for="emailInput">Your Email</label>
+            <input type="email" id="emailInput" placeholder="example@example.com">
+            <button id="loadButton">Load Website</button>
+            <button id="injectButton">Bypass Event Listeners</button>
+            <div id="iframeContainer">
+                <iframe id="targetIframe" src=""></iframe>
+            </div>
         </div>
+
+        <div id="tab2" class="tab-content">
+            <textarea class="console-input" id="consoleInput" placeholder="Type your Google search here..."></textarea>
+            <button class="console-button" id="runConsoleButton">Search</button>
+        </div>
+
+        <div id="notification" class="notification"></div>
     </div>
-
-    <div id="notification" class="notification"></div>
-
-    <!-- Language switch button -->
-    <button id="languageSwitch" onclick="toggleLanguage()">English</button>
-
-    <!-- Full screen toggle button -->
-    <button id="fullScreenToggle" onclick="toggleFullScreen()">Full Screen</button>
 
     <script>
         alert('This is the AZOTA BYPASS (Link) - Version 1.1.0 (Made by Nguyen Huynh Dang Nhut - https://github.com/DangNhutNguyen)');
         alert('The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you');
         alert('Ứng dụng không được sử dụng trong các mục đích xấu, gây ảnh hưởng đến các quyền lợi khi học và đây là ứng dụng dùng cho việc ứng dụng HTML, mọi hành vi gây ảnh hưởng như: Sử dụng ứng dụng trong thời gian thi, gây ảnh hưởng và gây hậu quả có thể bị truy tố trách nhiệm. Xin cảm ơn');
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
         document.getElementById('loadButton').addEventListener('click', function() {
+            const url = document.getElementById('urlInput').value;
             const password = document.getElementById('passwordInput').value;
-            if (password === '09102008') { // Example password
-                const url = document.getElementById('urlInput').value;
-                if (url) {
-                    document.getElementById('targetIframe').src = url;
-                    showNotification('Website loaded successfully.');
-                    alert('Website loaded successfully.')
-                } else {
-                    alert('Please enter a valid URL.');
-                }
+            if (password === '09102008') {
+                document.getElementById('targetIframe').src = url;
+                showNotification('Website loaded successfully.', 'success');
             } else {
-                alert('Incorrect password.');
+                showNotification('Invalid password.', 'error');
             }
         });
+
         document.getElementById('injectButton').addEventListener('click', function() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === '09102008') { // Example password
-                const iframe = document.getElementById('targetIframe');
+            const iframe = document.getElementById('targetIframe');
+            const bypassScript = `
+                function removeAllEventListeners(target, eventTypes) {
+                    eventTypes.forEach(eventType => {
+                        const listeners = getEventListeners(target)[eventType];
+                        if (listeners) {
+                            listeners.forEach(listener => {
+                                target.removeEventListener(eventType, listener.listener);
+                            });
+                        }
+                    });
+                }
+
+                const eventTypes = [
+                    'beforeunload', 'blur', 'click', 'DOMContentLoaded', 'hashchange',
+                    'keydown', 'load', 'locationchange', 'message', 'mousedown',
+                    'orientationchange', 'popstate', 'resize', 'scroll', 'touchstart',
+                    'visibilitychange'
+                ];
+
+                // Remove event listeners from window and document
+                removeAllEventListeners(window, eventTypes);
+                removeAllEventListeners(document, eventTypes);
+
+                console.log("Removed all event listeners.");
+            `;
+
+            iframe.onload = function() {
                 const iframeWindow = iframe.contentWindow;
-        
-                iframeWindow.eval(`
-                    // JavaScript code to bypass event listeners inside the iframe
-                    function removeAllEventListeners(target, eventTypes) {
-                        eventTypes.forEach(eventType => {
-                            const listeners = getEventListeners(target)[eventType];
-                            if (listeners) {
-                                listeners.forEach(listener => {
-                                    target.removeEventListener(eventType, listener.listener);
-                                });
-                            }
-                        });
-                    }
-                    
-                    const eventTypes = [
-                        'beforeunload', 'blur', 'click', 'DOMContentLoaded', 'hashchange',
-                        'keydown', 'load', 'locationchange', 'message', 'mousedown',
-                        'orientationchange', 'popstate', 'resize', 'scroll', 'touchstart',
-                        'visibilitychange'
-                    ];
-                    
-                    // Remove event listeners from window and document inside the iframe
-                    removeAllEventListeners(window, eventTypes);
-                    removeAllEventListeners(document, eventTypes);
-                    
-                    console.log("Removed all event listeners inside iframe");
-        
-                `);
-                alert('Event listeners inside the iframe bypassed successfully.')
-                // Show notification outside the iframe
-                showNotification('Event listeners inside the iframe bypassed successfully.');
-            } else {
-                alert('Incorrect password - Contact: penciltalk0910@gmail.com');
-            }
-        });
-        document.getElementById('toggleModeButton').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            document.querySelector('.container').classList.toggle('dark-mode');
+                iframeWindow.eval(bypassScript);
+                showNotification('Bypass script injected.', 'success');
+            };
         });
 
-        function showNotification(message) {
-            if ('Notification' in window) {
-                Notification.requestPermission().then(function(result) {
-                    if (result === 'granted') {
-                        new Notification('Azota Bypass', { body: message });
-                    }
-                });
+        document.getElementById('runConsoleButton').addEventListener('click', function() {
+            const query = document.getElementById('consoleInput').value.trim();
+            if (query) {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.open(searchUrl, '_blank');
             } else {
-                console.log('This browser does not support desktop notification');
+                showNotification('Please enter a search query.', 'error');
             }
-        }
+        });
 
-        function toggleLanguage() {
-            const languageButton = document.getElementById('languageSwitch');
-            if (languageButton.textContent === 'English') {
-                // Switch to Vietnamese
-                languageButton.textContent = 'Tiếng Việt';
-                // Add code to switch interface to Vietnamese
-                document.getElementById('loadButton').textContent = 'Tải Trang Web';
-                document.getElementById('injectButton').textContent = 'Bỏ Qua';
-                document.getElementById('toggleModeButton').textContent = 'Chế Độ Tối';
-                document.querySelector('h1').textContent = 'AZOTA BYPASS (LINK) Phiên Bản 1.1.0 - NGUYEN HUYNH DANG NHUT';
-                document.querySelector('label[for="urlInput"]').textContent = 'Nhập Đường Link AZOTA ';
-                document.querySelector('.description').textContent = 'Nhập Mật Khẩu hoặc Liên hệ quản trị viên để chấp nhận bạn sử dụng trang web này';
-                document.querySelector('label[for="passwordInput"]').textContent = 'Nhập mật khẩu';
-                document.querySelector('label[for="emailInput"]').textContent = 'Nhập email của bạn';
-                // Add additional translations as needed
-            } else {
-                // Switch to English
-                languageButton.textContent = 'English';
-                // Add code to switch interface to English
-                document.getElementById('loadButton').textContent = 'Load Website';
-                document.getElementById('injectButton').textContent = 'BYPASS';
-                document.getElementById('toggleModeButton').textContent = 'Toggle Dark Mode';
-                document.querySelector('h1').textContent = 'AZOTA BYPASS (LINK) Version 1.1.0 - NGUYEN HUYNH DANG NHUT';
-                document.querySelector('label[for="urlInput"]').textContent = 'Enter The AZOTA EXAM URL';
-                document.querySelector('.description').textContent = 'Enter Password or Contact to admin to accepted you use this site';
-                document.querySelector('label[for="passwordInput"]').textContent = 'Enter password';
-                document.querySelector('label[for="emailInput"]').textContent = 'Enter your email';
-                // Add additional translations as needed
-            }
-        }
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
 
-        function toggleZoom() {
-            const iframe = document.getElementById('targetIframe');
-            const currentZoom = parseFloat(iframe.style.transform.replace('scale(', '').replace(')', '')) || 1;
-            const newZoom = currentZoom === 1 ? 1.5 : 1; // Toggle between 1x and 1.5x zoom
-            iframe.style.transform = `scale(${newZoom})`;
-        }
-
-        function toggleFullScreen() {
-            const iframeContainer = document.getElementById('iframeContainer');
-            const iframe = document.getElementById('targetIframe');
-            if (!document.fullscreenElement) {
-                iframeContainer.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
-        }
-
-        // Function to close the "How to Use" section
-        function closeHowToUse() {
-            const howToUseSection = document.getElementById('howToUseSection');
-            howToUseSection.style.display = 'none';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
         }
     </script>
 </body>
