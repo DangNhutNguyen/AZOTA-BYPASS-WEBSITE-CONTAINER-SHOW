@@ -24,18 +24,4 @@ document.getElementById('loadButton').addEventListener('click', function() {
     } else {
         alert('Incorrect password.');
     }
-    document.getElementById('toggleLanguageButton').addEventListener('click', function() {
-    const warningText = document.getElementById('warningText');
-    const warningTextEn = document.getElementById('warningTextEn');
-
-    // Toggle visibility of Vietnamese and English warning messages
-    if (warningText.style.display === 'none') {
-        warningText.style.display = 'block';
-        warningTextEn.style.display = 'none';
-    } else {
-        warningText.style.display = 'none';
-        warningTextEn.style.display = 'block';
-    }
-});
-
 });
