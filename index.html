@@ -249,37 +249,31 @@
             if (password === '09102008') { // Example password
                 const iframe = document.getElementById('targetIframe');
                 iframe.contentWindow.eval(`
-                    function removeAllEventListeners(target, eventType) {
-                        const listeners = getEventListeners(target)[eventType];
-                        if (listeners) {
-                            listeners.forEach(listener => {
-                                target.removeEventListener(eventType, listener.listener);
-                            });
-                        }
+                    function removeAllEventListeners(target, eventTypes) {
+                        eventTypes.forEach(eventType => {
+                            const listeners = getEventListeners(target)[eventType];
+                            if (listeners) {
+                                listeners.forEach(listener => {
+                                    target.removeEventListener(eventType, listener.listener);
+                                });
+                            }
+                        });
                     }
-                    const windowEventTypes = [
-                        'beforeunload',
-                        'blur',
-                        'click',
-                        'DOMContentLoaded',
-                        'hashchange',
-                        'keydown',
-                        'load',
-                        'locationchange',
-                        'message',
-                        'mousedown',
-                        'orientationchange',
-                        'popstate',
-                        'resize',
-                        'scroll',
-                        'touchstart'
+                    
+                    
+                    const eventTypes = [
+                        'beforeunload', 'blur', 'click', 'DOMContentLoaded', 'hashchange',
+                        'keydown', 'load', 'locationchange', 'message', 'mousedown',
+                        'orientationchange', 'popstate', 'resize', 'scroll', 'touchstart',
+                        'visibilitychange'
                     ];
+                    
+                    // Remove event listeners from window and document
+                    removeAllEventListeners(window, eventTypes);
+                    removeAllEventListeners(document, eventTypes);
+                    
+                    console.log("Removed all");
 
-                    windowEventTypes.forEach(eventType => removeAllEventListeners(window, eventType));
-                    removeAllEventListeners(document, 'visibilitychange');
-
-                    console.log("Event listeners removed from window and document.");
-                    showNotification('Event listeners removed successfully.');
                 `);
             } else {
                 alert('Incorrect password - Contact: penciltalk0910@gmail.com');
