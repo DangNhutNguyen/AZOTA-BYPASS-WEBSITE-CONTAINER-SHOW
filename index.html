@@ -242,6 +242,10 @@
                 alert('Incorrect password.');
             }
         });
+    <div id="warningMessage" class="warning-message">
+        <p id="warningText" class="warning-text">Ứng dụng không được sử dụng trong các mục đích xấu, gây ảnh hưởng đến các quyền lợi khi học và đây là ứng dụng dùng cho việc ứng dụng HTML, mọi hành vi gây ảnh hưởng như: Sử dụng ứng dụng trong thời gian thi, gây ảnh hưởng và gây hậu quả có thể bị truy tố trách nhiệm. Xin cảm ơn</p>
+        <p id="warningTextEn" class="warning-text" style="display: none;">The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you</p>
+    </div>
 
         document.getElementById('injectButton').addEventListener('click', function() {
             const password = document.getElementById('passwordInput').value;
