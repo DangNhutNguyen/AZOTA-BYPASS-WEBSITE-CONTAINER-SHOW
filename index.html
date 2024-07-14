@@ -18,7 +18,7 @@
         }
         .container {
             width: 80%;
-            height: 180%;
+            max-width: 800px;
             padding: 40px;
             background-color: #fff;
             border-radius: 8px;
@@ -26,7 +26,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.3s ease;
             position: relative;
         }
         h1 {
@@ -69,7 +68,7 @@
             font-weight: bold;
         }
         input[type="password"], input[type="text"], input[type="email"] {
-            width: calc(100% - 90px);
+            width: calc(100% - 20px);
             padding: 8px;
             font-size: 14px;
             border: 1px solid #ccc;
@@ -92,18 +91,20 @@
         }
         #iframeContainer {
             width: 100%;
-            flex: 1;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
             border: 2px solid #ccc;
             margin-top: 40px;
-            border-radius: 40px;
+            border-radius: 4px;
             overflow: hidden;
-            position: relative;
         }
         iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 800px;
+            height: 100%;
             border: none;
-            transition: all 0.3s ease;
         }
         .console {
             width: 100%;
@@ -160,7 +161,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="C:\Users\HP\Desktop\cod2\logo.png" alt="Logo" class="logo">
+        <img src="logo.png" alt="Logo" class="logo">
         <h1>AZOTA BYPASS (LINK) Version 2.0.0</h1>
         
         <div class="tabs">
@@ -191,9 +192,10 @@
     </div>
 
     <script>
-        alert('This is the AZOTA BYPASS (Link) - Version 1.1.0 (Made by Nguyen Huynh Dang Nhut - https://github.com/DangNhutNguyen)');
+        alert('This is the AZOTA BYPASS (Link) - Version 2.0.0 (Made by Nguyen Huynh Dang Nhut - https://github.com/DangNhutNguyen)');
         alert('The application must not be used for bad purposes, affecting learning rights and this is an application used for HTML application, any harmful behavior such as: Using the application during the exam, causing influence, and causing consequences can be prosecuted. Thank you');
         alert('Ứng dụng không được sử dụng trong các mục đích xấu, gây ảnh hưởng đến các quyền lợi khi học và đây là ứng dụng dùng cho việc ứng dụng HTML, mọi hành vi gây ảnh hưởng như: Sử dụng ứng dụng trong thời gian thi, gây ảnh hưởng và gây hậu quả có thể bị truy tố trách nhiệm. Xin cảm ơn');
+
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -216,35 +218,34 @@
 
         document.getElementById('injectButton').addEventListener('click', function() {
             const iframe = document.getElementById('targetIframe');
-            const bypassScript = `
-                function removeAllEventListeners(target, eventTypes) {
-                    eventTypes.forEach(eventType => {
-                        const listeners = getEventListeners(target)[eventType];
-                        if (listeners) {
-                            listeners.forEach(listener => {
-                                target.removeEventListener(eventType, listener.listener);
-                            });
-                        }
-                    });
-                }
-
-                const eventTypes = [
-                    'beforeunload', 'blur', 'click', 'DOMContentLoaded', 'hashchange',
-                    'keydown', 'load', 'locationchange', 'message', 'mousedown',
-                    'orientationchange', 'popstate', 'resize', 'scroll', 'touchstart',
-                    'visibilitychange'
-                ];
-
-                // Remove event listeners from window and document
-                removeAllEventListeners(window, eventTypes);
-                removeAllEventListeners(document, eventTypes);
-
-                console.log("Removed all event listeners.");
-            `;
-
             iframe.onload = function() {
-                const iframeWindow = iframe.contentWindow;
-                iframeWindow.eval(bypassScript);
+                const script = document.createElement('script');
+                script.textContent = `
+                    (function() {
+                        const removeAllEventListeners = (target, eventTypes) => {
+                            eventTypes.forEach(eventType => {
+                                const listeners = getEventListeners(target, eventType);
+                                if (listeners) {
+                                    listeners.forEach(listener => {
+                                        target.removeEventListener(eventType, listener.listener);
+                                    });
+                                }
+                            });
+                        };
+
+                        const eventTypes = [
+                            'beforeunload', 'blur', 'click', 'DOMContentLoaded', 'hashchange',
+                            'keydown', 'load', 'locationchange', 'message', 'mousedown',
+                            'orientationchange', 'popstate', 'resize', 'scroll', 'touchstart',
+                            'visibilitychange'
+                        ];
+
+                        removeAllEventListeners(window, eventTypes);
+                        removeAllEventListeners(document, eventTypes);
+                        console.log("Removed all event listeners.");
+                    })();
+                `;
+                iframe.contentDocument.head.appendChild(script);
                 showNotification('Bypass script injected.', 'success');
             };
         });
