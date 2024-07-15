@@ -1,6 +1,5 @@
 # AZOTA BYPASS (LINK) VERSION  2.0 - NGUYEN HUYNH DANG NHUT
-- Enter this website:
-  ![image](https://github.com/user-attachments/assets/ce960160-23ff-4d3c-a497-23cf2c5fbbfd)
+- Enter this website: https://dangnhutnguyen.github.io/azotabypass/index.html
 - Accepted all the warning messages:
   ![image](https://github.com/user-attachments/assets/629a245b-e868-43f8-b153-4a56dc867228)
 - Enter the AZOTA URL & Password & Your email:
