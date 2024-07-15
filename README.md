@@ -1,5 +1,6 @@
-<title> AZOTA BYPASS (LINK) VERSION  2.0 - NGUYEN HUYNH DANG NHUT</title>
+# AZOTA BYPASS (LINK) VERSION  2.0 - NGUYEN HUYNH DANG NHUT
 - Enter this website:
+  ![image](https://github.com/user-attachments/assets/ce960160-23ff-4d3c-a497-23cf2c5fbbfd)
 - Accepted all the warning messages:
   ![image](https://github.com/user-attachments/assets/629a245b-e868-43f8-b153-4a56dc867228)
 - Enter the AZOTA URL & Password & Your email:
@@ -11,4 +12,6 @@
   ![image](https://github.com/user-attachments/assets/04fca71e-593f-4c8f-9c7d-28b1162e518e)
 - But please don't change the window size, because the AZOTA will Warning you:
   ![image](https://github.com/user-attachments/assets/a93532df-9001-417d-8e58-25b737abd035)
-Enjoys AZOTA BYPASS now
+- Enjoying AZOTA BYPASS - NGUYENHUYNHDANGNHUT now!, If you have any question, asks me at: penciltalk0910@gmail.com
+- I will update the tools more, because now there are too much issues, so please contact me if you want!
+
